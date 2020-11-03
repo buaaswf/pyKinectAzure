@@ -31,6 +31,12 @@ if __name__ == "__main__":
 
 	k = 0
 	frame = 0
+	import time  # 引入time模块
+	ticks = time.time()
+	mainfile = str(ticks)
+	os.makedirs(mainfile)
+	os.makedirs(os.path.join(mainfile,'depth'))
+	os.makedirs(os.path.join(mainfile,'rgb'))
 	while True:
 		# Get capture
 		pyK4A.device_get_capture()
@@ -59,8 +65,8 @@ if __name__ == "__main__":
 			# Plot the image
 			cv2.namedWindow('Colorized Depth Image',cv2.WINDOW_NORMAL)
 			cv2.imshow('Colorized Depth Image',combined_image)
-			cv2.imwrite(os.path.join("depth",str(frame)+".jpg"), transformed_depth_color_image)
-			cv2.imwrite(os.path.join("rgb",str(frame)+".jpg"), color_image)
+			cv2.imwrite(os.path.join(mainfile,'depth',str(frame)+".jpg"), transformed_depth_color_image)
+			cv2.imwrite(os.path.join(mainfile,'rgb',str(frame)+".jpg"), color_image)
 
 			frame+=1
 			k = cv2.waitKey(5)
